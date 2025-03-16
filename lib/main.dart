@@ -54,7 +54,18 @@ class _FuturePageState extends State<FuturePage> {
           children: [
             Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  getData().then((value) {
+                    // Mengambil data dari API Google Books
+                    result = value.body.toString().substring(0, 450); // Menampilkan 450 karakter pertama
+                    setState(() {});
+                  }).catchError((_) {
+                    result = 'An error occurred';
+                    setState(() {});
+                  });
+                });
+              },
               child: const Text('Go'),
             ),
             Spacer(),
