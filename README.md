@@ -287,3 +287,20 @@ Future handleError() async {
 - Memiliki block finally yang akan selalu dieksekusi
 - Mencegah aplikasi crash dengan penanganan error yang tepat
 
+### Soal No 11
+
+```dart
+ @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Current Location Miftah'),
+      ),
+      body: Center(
+        child: Text(myPosition),
+      ),
+    );
+  }
+```
+
+Menambahkan nama panggilan tiap properti title sebagai identitas pekerjaan.
