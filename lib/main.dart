@@ -100,6 +100,25 @@ class _FuturePageState extends State<FuturePage> {
     }
   }
 
+// FutureGroup
+// FutureGroup adalah kelas yang memungkinkan kita untuk mengelola beberapa future sekaligus.
+  void returnFG() {
+    FutureGroup<int> futureGroup = FutureGroup<int>();
+    futureGroup.add(returnOneAsync());
+    futureGroup.add(returnTwoAsync());
+    futureGroup.add(returnThreeAsync());
+    futureGroup.close();
+    futureGroup.future.then((List<int> value) {
+      int total = 0;
+      for (var element in value) {
+        total += element;
+      }
+      setState(() {
+        result = total.toString();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,32 +131,7 @@ class _FuturePageState extends State<FuturePage> {
             Spacer(),
             ElevatedButton(
               onPressed: () {
-                // setState(() {
-                //   getData().then((value) {
-                //     // Mengambil data dari API Google Books
-                //     result = value.body
-                //         .toString()
-                //         .substring(0, 450); // Menampilkan 450 karakter pertama
-                //     setState(() {});
-                //   }).catchError((_) {
-                //     result = 'An error occurred';
-                //     setState(() {});
-                //   });
-                // });
-                // count();
-                // getNumber().then((value) {
-                //   setState(() {
-                //     result = value.toString();
-                //   });
-                // });
-
-                getNumber().then((value) {
-                  setState(() {
-                    result = value.toString();
-                  });
-                }).catchError((e) {
-                  result = 'An error occurred';
-                });
+               returnFG();
               },
               child: const Text('Go'),
             ),
