@@ -1,16 +1,90 @@
-# books
+  # Tugas Flutter Books
 
-A new Flutter project.
+## Deskripsi Proyek
+Proyek Flutter yang mendemonstrasikan operasi asynchronous dan integrasi API.
 
-## Getting Started
+## Laporan Praktikum
 
-This project is a starting point for a Flutter application.
+### Soal no 1
+```dart
+Widget build(BuildContext context) {
+  return MaterialApp(
+    title: 'Miftah',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
+    home: const FuturePage(),
+  );
+}
+```
 
-A few resources to get you started if this is your first Flutter project:
+### Soal no 2
+Implementasi pencarian buku menggunakan Google Books API.
+[Lihat Contoh Buku Spider-Man](https://www.google.co.id/books/edition/SpiderMan/RYI0DwAAQBAJ)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Hasil Pencarian Buku](/images/soal-2.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Soal no 3
+```dart
+setState(() {
+  getData().then((value) {
+    result = value.body
+        .toString()
+        .substring(0, 450);
+    setState(() {});
+  }).catchError((_) {
+    result = 'An error occurred';
+    setState(() {});
+  });
+});
+```
+
+#### Penjelasan:
+- **Implementasi Substring**: Mengambil 450 karakter pertama dari respons
+- **Catch Error**: Menangani kegagalan API dengan baik
+- **Set State**: Memperbarui UI secara tepat
+
+![Capture no 3](/images/capture%20no%203.gif)
+
+### Soal no 4
+
+#### Langkah 1
+```dart
+Future<int> returnOneAsync() async {
+  await Future.delayed(const Duration(seconds: 3));
+  return 1;
+}
+
+Future<int> returnTwoAsync() async {
+  await Future.delayed(const Duration(seconds: 3));
+  return 2;
+}
+
+Future<int> returnThreeAsync() async {
+  await Future.delayed(const Duration(seconds: 3));
+  return 3;
+}
+```
+
+#### Langkah 2
+```dart
+Future count() async {
+  int total = 0;
+  total += await returnOneAsync();
+  total += await returnTwoAsync();
+  total += await returnThreeAsync();
+  setState(() {
+    result = total.toString();
+  });
+}
+```
+
+#### Penjelasan:
+- **Fungsi returnOneAsync()**: untuk mengembalikan nilai 1 setelah 3 detik
+- **Fungsi returnTwoAsync()**: untuk mengembalikan nilai 2 setelah 3 detik
+- **Fungsi returnThreeAsync()**: untuk mengembalikan nilai 3 setelah 3 detik
+- **Future count() async**: Fungsi count() untuk menjumlahkan nilai yang dikembalikan oleh fungsi returnOneAsync(), returnTwoAsync(), dan returnThreeAsync(). Menggunakan setState() untuk memperbarui UI dengan hasil total
+Hasil akhir dikonversi ke string dan disimpan dalam variabel result
+
+![Capture no 4](/images/capture%20no%204.gif)

@@ -43,6 +43,35 @@ class _FuturePageState extends State<FuturePage> {
     return http.get(uri);
   }
 
+// Fungsi returnOneAsync() untuk mengembalikan nilai 1 setelah 3 detik
+  Future<int> returnOneAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 1;
+  }
+
+// Fungsi returnTwoAsync() untuk mengembalikan nilai 2 setelah 3 detik
+  Future<int> returnTwoAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 2;
+  }
+
+// Fungsi returnThreeAsync() untuk mengembalikan nilai 3 setelah 3 detik
+  Future<int> returnThreeAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 3;
+  }
+
+// Fungsi count() untuk menjumlahkan nilai yang dikembalikan oleh fungsi returnOneAsync(), returnTwoAsync(), dan returnThreeAsync()
+  Future count() async {
+    int total = 0;
+    total += await returnOneAsync();
+    total += await returnTwoAsync();
+    total += await returnThreeAsync();
+    setState(() {
+      result = total.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,16 +84,19 @@ class _FuturePageState extends State<FuturePage> {
             Spacer(),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  getData().then((value) {
-                    // Mengambil data dari API Google Books
-                    result = value.body.toString().substring(0, 450); // Menampilkan 450 karakter pertama
-                    setState(() {});
-                  }).catchError((_) {
-                    result = 'An error occurred';
-                    setState(() {});
-                  });
-                });
+                // setState(() {
+                //   getData().then((value) {
+                //     // Mengambil data dari API Google Books
+                //     result = value.body
+                //         .toString()
+                //         .substring(0, 450); // Menampilkan 450 karakter pertama
+                //     setState(() {});
+                //   }).catchError((_) {
+                //     result = 'An error occurred';
+                //     setState(() {});
+                //   });
+                // });
+                count();
               },
               child: const Text('Go'),
             ),
