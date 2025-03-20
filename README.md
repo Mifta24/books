@@ -1,11 +1,13 @@
-  # Tugas Flutter Books
+# Tugas Flutter Books
 
 ## Deskripsi Proyek
+
 Proyek Flutter yang mendemonstrasikan operasi asynchronous dan integrasi API.
 
 ## Laporan Praktikum
 
 ### Soal no 1
+
 ```dart
 Widget build(BuildContext context) {
   return MaterialApp(
@@ -20,12 +22,14 @@ Widget build(BuildContext context) {
 ```
 
 ### Soal no 2
+
 Implementasi pencarian buku menggunakan Google Books API.
 [Lihat Contoh Buku Spider-Man](https://www.google.co.id/books/edition/SpiderMan/RYI0DwAAQBAJ)
 
 ![Hasil Pencarian Buku](/images/soal-2.png)
 
 ### Soal no 3
+
 ```dart
 setState(() {
   getData().then((value) {
@@ -41,16 +45,19 @@ setState(() {
 ```
 
 #### Penjelasan:
+
 - **Implementasi Substring**: Mengambil 450 karakter pertama dari respons
 - **Catch Error**: Menangani kegagalan API dengan baik
 - **Set State**: Memperbarui UI secara tepat
 
 #### Demo
+
 ![Capture no 3](/images/capture%20no%203.gif)
 
 ### Soal no 4
 
 #### Langkah 1
+
 ```dart
 Future<int> returnOneAsync() async {
   await Future.delayed(const Duration(seconds: 3));
@@ -69,6 +76,7 @@ Future<int> returnThreeAsync() async {
 ```
 
 #### Langkah 2
+
 ```dart
 Future count() async {
   int total = 0;
@@ -82,18 +90,21 @@ Future count() async {
 ```
 
 #### Penjelasan:
+
 - **Fungsi returnOneAsync()**: untuk mengembalikan nilai 1 setelah 3 detik
 - **Fungsi returnTwoAsync()**: untuk mengembalikan nilai 2 setelah 3 detik
 - **Fungsi returnThreeAsync()**: untuk mengembalikan nilai 3 setelah 3 detik
 - **Future count() async**: Fungsi count() untuk menjumlahkan nilai yang dikembalikan oleh fungsi returnOneAsync(), returnTwoAsync(), dan returnThreeAsync(). Menggunakan setState() untuk memperbarui UI dengan hasil total
-Hasil akhir dikonversi ke string dan disimpan dalam variabel result
+  Hasil akhir dikonversi ke string dan disimpan dalam variabel result
 
 #### Demo
+
 ![Capture no 4](/images/capture%20no%204.gif)
 
 ### Soal No 5
 
 #### Langkah 2
+
 ```dart
 late Completer completer;
 
@@ -110,11 +121,60 @@ Future calculate() async {
 ```
 
 #### Penjelasan:
+
 - **late Completer**: Menggunakan keyword late karena akan diinisialisasi nanti. Completer adalah class untuk mengelola Future secara manual
 - **Fungsi getNumber()**: Membuat Completer baru yang akan menghasilkan nilai integer. Memanggil fungsi calculate() secara async. Mengembalikan Future yang akan selesai ketika Completer complete
 - **Fungsi calculate()**: Fungsi async dengan delay 5 detik
-Setelah delay, menyelesaikan Completer dengan nilai 42
+  Setelah delay, menyelesaikan Completer dengan nilai 42
 
 #### Demo
+
 ![Capture no 5](/images/capture%20no%205.gif)
+
+### Soal No 6
+
+#### Langkah 5-6
+
+```dart
+calculate() async {
+  try {
+    await Future.delayed(const Duration(seconds: 5));
+    completer.complete(42);
+  } catch (_) {
+    completer.completeError({});
+  }
+}
+
+getNumber().then((value) {
+  setState(() {
+    result = value.toString();
+  });
+}).catchError((e) {
+  result = 'An error occurred';
+});
+```
+
+#### Penjelasan:
+
+- **Perbedaan**:
+
+1. Penanganan Error
+
+- Sebelumnya: Tidak ada penanganan error secara eksplisit
+- Sekarang: Menggunakan try-catch untuk menangkap error yang mungkin terjadi
+
+2. Complete Error
+
+- Sebelumnya: Hanya bisa complete dengan nilai sukses (42)
+- Sekarang: Bisa complete dengan:
+  - Sukses: completer.complete(42)
+  - Error: completer.completeError({})
+- **Fungsi getNumber()**: 
+- Dapat menangkap error yang di-propagate dari calculate()
+- Menampilkan pesan error ke UI jika terjadi kesalahan
+
+#### Demo
+
+![Capture no 6](/images/capture%20no%206.gif)
+
 

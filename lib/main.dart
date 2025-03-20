@@ -85,9 +85,19 @@ class _FuturePageState extends State<FuturePage> {
   }
 
 // untuk menghitung nilai 42
-  Future calculate() async {
-    await Future.delayed(const Duration(seconds: 5));
-    completer.complete(42);
+  // Future calculate() async {
+  //   await Future.delayed(const Duration(seconds: 5));
+  //   completer.complete(42);
+  // }
+
+// untuk menghitung nilai 42 dan menangkap error jika terjadi
+  calculate() async {
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (_) {
+      completer.completeError({});
+    }
   }
 
   @override
@@ -115,10 +125,18 @@ class _FuturePageState extends State<FuturePage> {
                 //   });
                 // });
                 // count();
+                // getNumber().then((value) {
+                //   setState(() {
+                //     result = value.toString();
+                //   });
+                // });
+
                 getNumber().then((value) {
                   setState(() {
                     result = value.toString();
                   });
+                }).catchError((e) {
+                  result = 'An error occurred';
                 });
               },
               child: const Text('Go'),
