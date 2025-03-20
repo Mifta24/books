@@ -45,6 +45,7 @@ setState(() {
 - **Catch Error**: Menangani kegagalan API dengan baik
 - **Set State**: Memperbarui UI secara tepat
 
+#### Demo
 ![Capture no 3](/images/capture%20no%203.gif)
 
 ### Soal no 4
@@ -87,4 +88,33 @@ Future count() async {
 - **Future count() async**: Fungsi count() untuk menjumlahkan nilai yang dikembalikan oleh fungsi returnOneAsync(), returnTwoAsync(), dan returnThreeAsync(). Menggunakan setState() untuk memperbarui UI dengan hasil total
 Hasil akhir dikonversi ke string dan disimpan dalam variabel result
 
+#### Demo
 ![Capture no 4](/images/capture%20no%204.gif)
+
+### Soal No 5
+
+#### Langkah 2
+```dart
+late Completer completer;
+
+Future getNumber() {
+  completer = Completer<int>();
+  calculate();
+  return completer.future;
+}
+
+Future calculate() async {
+  await Future.delayed(const Duration(seconds : 5));
+  completer.complete(42);
+}
+```
+
+#### Penjelasan:
+- **late Completer**: Menggunakan keyword late karena akan diinisialisasi nanti. Completer adalah class untuk mengelola Future secara manual
+- **Fungsi getNumber()**: Membuat Completer baru yang akan menghasilkan nilai integer. Memanggil fungsi calculate() secara async. Mengembalikan Future yang akan selesai ketika Completer complete
+- **Fungsi calculate()**: Fungsi async dengan delay 5 detik
+Setelah delay, menyelesaikan Completer dengan nilai 42
+
+#### Demo
+![Capture no 5](/images/capture%20no%205.gif)
+
