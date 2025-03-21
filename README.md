@@ -7,6 +7,7 @@ Proyek Flutter yang mendemonstrasikan operasi asynchronous dan integrasi API.
 ## Laporan Praktikum
 
 ### Soal no 1
+Menambahkan nama panggilan pada title app sebagai identitas hasil pekerjaan.
 
 ```dart
 Widget build(BuildContext context) {
@@ -288,6 +289,7 @@ Future handleError() async {
 - Mencegah aplikasi crash dengan penanganan error yang tepat
 
 ### Soal No 11
+Menambahkan nama panggilan tiap properti title sebagai identitas pekerjaan.
 
 ```dart
  @override
@@ -303,7 +305,6 @@ Future handleError() async {
   }
 ```
 
-Menambahkan nama panggilan tiap properti title sebagai identitas pekerjaan.
 
 ### Soal No 12
 
