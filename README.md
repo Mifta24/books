@@ -429,3 +429,76 @@ Menganti dengan warna tema favorit.
 ```dart
 Color color = const Color.fromARGB(255, 89, 108, 216)
 ```
+
+### Soal No 16
+
+Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+Yang terjadi saat mengklik button:
+
+1. First Screen Button (Change Color)
+
+- Saat diklik, navigasi ke halaman kedua
+- Background screen pertama masih terlihat di belakang
+- Menggunakan Navigator.push()
+
+2. Second Screen Buttons
+
+- Setiap button warna ketika diklik akan:
+- Mengubah warna background First Screen
+- Menutup Second Screen
+- Kembali ke First Screen dengan warna baru
+
+Mengapa Demikian?
+
+1. Mekanisme Navigasi
+
+```dart
+Future _navigateAndGetColor(BuildContext context) async {
+    color = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NavigationSecond()),
+        ) ??
+        Colors.blue;
+    setState(() {});
+}
+```
+
+- Navigator.push() menambah route baru ke stack
+- await menunggu nilai return dari Second Screen
+- setState() memperbarui UI dengan warna baru
+
+2. Data Passing
+
+- Warna dipilih di Second Screen
+- Dikirim kembali ke First Screen menggunakan Navigator.pop(color)
+- First Screen menerima dan mengupdate state
+
+Ganti 3 warna pada langkah 5 dengan warna favorit
+
+```dart
+ElevatedButton(
+              onPressed: () {
+                color = Color(0xFF6B4EFF);
+                Navigator.pop(context, color);
+              },
+              child: const Text('Change to Deep Purple'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                color = Color(0xFF00BFA5);
+                Navigator.pop(context, color);
+              },
+              child: const Text('Change to Teal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                color = Color(0xFFFF5252);
+                Navigator.pop(context, color);
+              },
+              child: const Text('Change to Red Accent'),
+            ),
+```
+
+#### Demo
+
+![Capture no 16](/images/capture%20no%2016.gif)
