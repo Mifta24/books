@@ -327,4 +327,55 @@ Ya, koordinat GPS didapatkan ketika menjalankan aplikasi di browser karena beber
 - Saat aplikasi meminta akses lokasi, browser akan menampilkan prompt permission ke pengguna
 - Jika user mengizinkan, koordinat GPS bisa didapatkan
 
+#### Demo
+
 ![Capture no 12](/images/capture%20no%2012.gif)
+
+### Soal No 13
+
+Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+
+Ya, ada sedikit perbedaan UI dengan praktikum sebelumnya karena beberapa faktor:
+
+1. Struktur Widget yang Berbeda
+
+```dart
+// Praktikum Sebelumnya
+final myWidget = myPosition == ''
+    ? const CircularProgressIndicator()
+    : Text(myPosition);
+
+// Praktikum Saat ini
+child: FutureBuilder(
+    future: position,
+      builder: (context, AsyncSnapshot<Position> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return Text(snapshot.data.toString());
+          } else {
+            return const Text('');
+          }
+    }),
+```
+
+2. Perbedaan Pendekatan
+- Sebelumnya: Menggunakan variabel myPosition (String) untuk menentukan tampilan
+- Sekarang: Menggunakan FutureBuilder yang langsung mengelola state dari Future
+3. Alasan Perbedaan
+- FutureBuilder lebih tepat untuk menangani async operations
+- Memberikan kontrol lebih baik atas state loading
+- Langsung menghandle perubahan state dari Future
+- Tidak perlu manual update variabel myPosition
+4. Keuntungan Menggunakan FutureBuilder
+- Otomatis menangani state loading
+- Lebih clean dan maintainable
+- Built-in error handling
+- Reactive terhadap perubahan Future
+#### Demo
+
+![Capture no 13](/images/capture%20no%2013.gif)
+
+Seperti yang Anda lihat, menggunakan FutureBuilder lebih efisien, clean, dan reactive dengan Future bersama UI.
+
+Karena dengan FutureBuilder lebih baik karena lebih sesuai dengan pattern async programming di Flutter.
