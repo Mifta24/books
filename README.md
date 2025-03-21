@@ -502,3 +502,82 @@ ElevatedButton(
 #### Demo
 
 ![Capture no 16](/images/capture%20no%2016.gif)
+
+### Soal No 17
+
+Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+
+**Apa yang Terjadi?**
+Ketika mengklik button pada Alert Dialog:
+
+1. Button "Change Color"
+
+- Membuka Alert Dialog
+- Menampilkan 3 pilihan warna
+- Background gelap (barrier) menghalangi interaksi dengan screen di belakangnya
+
+2. Button Warna (Red/Green/Blue)
+
+- Mengubah warna background Scaffold
+- Menutup Alert Dialog
+- Kembali ke screen utama dengan warna baru
+
+**Mengapa Hal Ini Terjadi?**
+
+```dart
+TextButton(
+    onPressed: () {
+        color = Colors.red.shade700;  // Set warna baru
+        Navigator.pop(context, color); // Tutup dialog
+    },
+    child: Text('Red')
+),
+
+```
+
+Proses yang terjadi:
+
+1. State Management
+
+- Variable color diupdate dengan warna baru
+- setState() dipanggil setelah dialog ditutup
+- Trigger rebuild widget dengan warna baru
+
+2. Dialog Control
+
+- barrierDismissible: false mencegah dialog ditutup dengan tap di luar
+- Navigator.pop() menutup dialog secara programatis
+- Warna diteruskan kembali ke screen utama
+
+3. UI Update
+
+- backgroundColor: color pada Scaffold menggunakan warna yang dipilih
+- Widget tree di-rebuild dengan warna baru
+- Transisi warna terjadi secara instan
+
+Mengganti 3 warna pada langkah 3 dengan warna favorit!
+
+```dart
+ TextButton(
+                  onPressed: () {
+                    color = Color(0xFF6B4EFF);
+                    Navigator.pop(context, color);
+                  },
+                  child: Text('Deep Purple')),
+              TextButton(
+                  onPressed: () {
+                    color = Color(0xFF00BFA5);
+                    Navigator.pop(context, color);
+                  },
+                  child: Text('Teal')),
+              TextButton(
+                  onPressed: () {
+                    color = Color(0xFFFF5252);
+                    Navigator.pop(context, color);
+                  },
+                  child: Text('Red Accent')),
+```
+
+#### Demo
+
+![Capture no 17](/images/capture%20no%2017.gif)
