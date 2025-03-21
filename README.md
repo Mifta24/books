@@ -360,18 +360,24 @@ child: FutureBuilder(
 ```
 
 2. Perbedaan Pendekatan
+
 - Sebelumnya: Menggunakan variabel myPosition (String) untuk menentukan tampilan
 - Sekarang: Menggunakan FutureBuilder yang langsung mengelola state dari Future
+
 3. Alasan Perbedaan
+
 - FutureBuilder lebih tepat untuk menangani async operations
 - Memberikan kontrol lebih baik atas state loading
 - Langsung menghandle perubahan state dari Future
 - Tidak perlu manual update variabel myPosition
+
 4. Keuntungan Menggunakan FutureBuilder
+
 - Otomatis menangani state loading
 - Lebih clean dan maintainable
 - Built-in error handling
 - Reactive terhadap perubahan Future
+
 #### Demo
 
 ![Capture no 13](/images/capture%20no%2013.gif)
@@ -379,3 +385,30 @@ child: FutureBuilder(
 Seperti yang Anda lihat, menggunakan FutureBuilder lebih efisien, clean, dan reactive dengan Future bersama UI.
 
 Karena dengan FutureBuilder lebih baik karena lebih sesuai dengan pattern async programming di Flutter.
+
+### Soal No 14
+
+Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+
+Tidak ada perubahan UI jika tidak ada error, Alasan tidak ada perubahan :
+
+1. Tampilan Normal
+
+- Jika tidak ada error: Tidak ada perbedaan UI
+- Tetap menampilkan koordinat lokasi
+
+2. Tampilan Error
+
+- Sebelumnya: Might crash atau menampilkan error system
+- Sekarang: Menampilkan pesan "Something terrible happened!"
+
+3. Keunggulan Pendekatan Baru
+
+- Menangani error dengan lebih elegan
+- User experience lebih baik
+- Mencegah crash aplikasi
+- Memberikan feedback yang jelas ke pengguna
+
+#### Demo
+
+![Capture no 14](/images/capture%20no%2014.gif)
