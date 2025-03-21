@@ -412,3 +412,20 @@ Tidak ada perubahan UI jika tidak ada error, Alasan tidak ada perubahan :
 #### Demo
 
 ![Capture no 14](/images/capture%20no%2014.gif)
+
+### Soal No 15
+
+Menambahkan nama panggilan Anda pada tiap properti title di class NavigationFirst sebagai identitas pekerjaan.
+
+```dart
+appBar: AppBar(
+        title: const Text('Current Location Miftah'),
+      ),
+
+```
+
+Menganti dengan warna tema favorit.
+
+```dart
+Color color = const Color.fromARGB(255, 89, 108, 216)
+```

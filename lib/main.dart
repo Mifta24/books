@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:books/geolocation.dart';
+import 'package:books/navigation_first.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // Untuk membuat tampilan aplikasi beradaptasi dengan baik pada berbagai perangkat
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LocationScreen(),
+      home: const NavigationFirst(),
     );
   }
 }
